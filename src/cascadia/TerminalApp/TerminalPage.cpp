@@ -870,6 +870,20 @@ namespace winrt::TerminalApp::implementation
             envMap.Insert(L"WT_PROFILE_ID", guidWString);
             envMap.Insert(L"WSLENV", L"WT_PROFILE_ID");
 
+            std::wstringstream environmentVariables(settings.EnvironmentVariables().c_str());
+            std::wstring line;
+
+            while (std::getline(environmentVariables, line))
+            {
+                const auto pos = line.find(L"=");
+                if (pos != std::wstring::npos)
+                {
+                    const auto key = line.substr(0, pos);
+                    const auto value = line.substr(pos + 1);
+                    envMap.Insert(key, value);
+                }
+            } 
+
             auto conhostConn = TerminalConnection::ConptyConnection(
                 settings.Commandline(),
                 settings.StartingDirectory(),

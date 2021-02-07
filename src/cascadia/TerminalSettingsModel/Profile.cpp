@@ -59,6 +59,7 @@ static constexpr std::string_view AntialiasingModeKey{ "antialiasingMode" };
 static constexpr std::string_view TabColorKey{ "tabColor" };
 static constexpr std::string_view BellStyleKey{ "bellStyle" };
 static constexpr std::string_view PixelShaderPathKey{ "experimental.pixelShaderPath" };
+static constexpr std::string_view EnvironmentKey{ "environment" };
 
 static constexpr std::wstring_view DesktopWallpaperEnum{ L"desktopWallpaper" };
 
@@ -339,6 +340,18 @@ void Profile::LayerJson(const Json::Value& json)
     JsonUtils::GetValueForKey(json, TabColorKey, _TabColor);
     JsonUtils::GetValueForKey(json, BellStyleKey, _BellStyle);
     JsonUtils::GetValueForKey(json, PixelShaderPathKey, _PixelShaderPath);
+
+    const auto environmentKey = std::string(EnvironmentKey);
+    if (json.isMember(environmentKey))
+    {
+        auto environmentNode = json[environmentKey];
+        std::wstringstream oss;
+        for (Json::Value::const_iterator it = environmentNode.begin(); it != environmentNode.end(); ++it)
+        {
+            oss << JsonUtils::GetValue<std::wstring>(it.key()) << L"=" << JsonUtils::GetValue<std::wstring>(*it) << L"\n";
+        }
+        EnvironmentVariables(hstring(oss.str()));
+    }
 }
 
 // Method Description:
