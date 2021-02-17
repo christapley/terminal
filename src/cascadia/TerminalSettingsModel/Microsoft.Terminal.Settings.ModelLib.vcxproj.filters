@@ -77,6 +77,7 @@
     <Midl Include="KeyChordSerialization.idl" />
     <Midl Include="EnumMappings.idl" />
     <Midl Include="IconPathConverter.idl" />
+    <Midl Include="EnvironmentVariableMap.idl" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

@@ -566,6 +566,9 @@
   <data name="Profile_StartingDirectory.Header" xml:space="preserve">
     <value>Starting directory</value>
   </data>
+  <data name="Profile_EnvironmentVariables.Header" xml:space="preserve">
+    <value>Environment variables</value>
+  </data>
   <data name="Profile_StartingDirectory.HelpText" xml:space="preserve">
     <value>The directory the profile starts in when it is loaded.</value>
   </data>

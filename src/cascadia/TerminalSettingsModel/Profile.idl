@@ -1,6 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT license.
 
+import "EnvironmentVariableMap.idl";
+
 namespace Microsoft.Terminal.Settings.Model
 {
     enum CloseOnExitMode
@@ -193,6 +195,6 @@ namespace Microsoft.Terminal.Settings.Model
 
         Boolean HasEnvironmentVariables();
         void ClearEnvironmentVariables();
-        Windows.Foundation.Collections.StringMap EnvironmentVariables;
+        EnvironmentVariableMap EnvironmentVariables;
     }
 }

@@ -414,12 +414,13 @@ void Profile::LayerJson(const Json::Value& json)
     if (json.isMember(environmentKey))
     {
         auto environmentNode = json[environmentKey];
-        StringMap rawEnvMap{}, resolvedEnvMap{};
-        for (Json::Value::const_iterator it = environmentNode.begin(); it != environmentNode.end(); ++it)
+        if (!HasEnvironmentVariables())
         {
-            rawEnvMap.Insert(JsonUtils::GetValue<hstring>(it.key()), JsonUtils::GetValue<hstring>(*it));
+            EnvironmentVariables({});
         }
+        _EnvironmentVariables->LayerJson(environmentNode);
 
+        /*
         auto view = rawEnvMap.GetView();
         for (auto it = view.First(); it.HasCurrent(); it.MoveNext())
         {
@@ -428,6 +429,7 @@ void Profile::LayerJson(const Json::Value& json)
         }
 
         EnvironmentVariables(resolvedEnvMap);
+        */
     }
 }
 

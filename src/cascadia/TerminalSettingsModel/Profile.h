@@ -23,6 +23,8 @@ Author(s):
 #include <DefaultSettings.h>
 #include <winrt/impl/Windows.Foundation.Collections.2.h>
 
+#include "EnvironmentVariableMap.h"
+
 using namespace winrt::Windows::Foundation::Collections;
 
 // fwdecl unittest classes
@@ -117,7 +119,7 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 
         GETSET_SETTING(Model::BellStyle, BellStyle, BellStyle::Audible);
 
-        GETSET_SETTING(StringMap, EnvironmentVariables);
+        GETSET_SETTING(EnvironmentVariableMap, EnvironmentVariables);
 
     private:
         static std::wstring EvaluateStartingDirectory(const std::wstring& directory);

@@ -110,6 +110,17 @@ the MIT License. See LICENSE in the project root for license information. -->
                             </StackPanel>
                         </local:SettingContainer>
 
+                        <!--Environment Variables-->
+                        <local:SettingContainer x:Uid="Profile_EnvironmentVariables">
+                            <ListView>
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Value}" />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </local:SettingContainer>
+
                         <!--Icon-->
                         <local:SettingContainer x:Uid="Profile_Icon"
                                                 HasSettingValue="{x:Bind State.Profile.HasIcon, Mode=OneWay}"
@@ -131,7 +142,7 @@ the MIT License. See LICENSE in the project root for license information. -->
                             <TextBox Text="{x:Bind State.Profile.TabTitle, Mode=TwoWay}"
                                      Style="{StaticResource TextBoxSettingStyle}"/>
                         </local:SettingContainer>
-
+                                               
                         <!--Hidden-->
                         <local:SettingContainer x:Uid="Profile_Hidden"
                                                 Visibility="{x:Bind State.Profile.IsBaseLayer, Mode=OneWay, Converter={StaticResource InvertedBooleanToVisibilityConverter}}">

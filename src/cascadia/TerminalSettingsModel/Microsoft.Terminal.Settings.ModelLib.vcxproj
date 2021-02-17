@@ -13,9 +13,12 @@
   </PropertyGroup>
   <Import Project="..\..\..\common.openconsole.props" Condition="'$(OpenConsoleDir)'==''" />
   <Import Project="$(OpenConsoleDir)src\cppwinrt.build.pre.props" />
-
   <!-- ========================= Headers ======================== -->
   <ItemGroup>
+    <ClInclude Include="EnvironmentVariableMap.h">
+      <DependentUpon>EnvironmentVariableMap.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClInclude>
     <ClInclude Include="IconPathConverter.h">
       <DependentUpon>IconPathConverter.idl</DependentUpon>
     </ClInclude>
@@ -65,6 +68,10 @@
   </ItemGroup>
   <!-- ========================= Cpp Files ======================== -->
   <ItemGroup>
+    <ClCompile Include="EnvironmentVariableMap.cpp">
+      <DependentUpon>EnvironmentVariableMap.idl</DependentUpon>
+      <SubType>Code</SubType>
+    </ClCompile>
     <ClCompile Include="IconPathConverter.cpp">
       <DependentUpon>IconPathConverter.idl</DependentUpon>
     </ClCompile>
@@ -125,6 +132,9 @@
     <Midl Include="CascadiaSettings.idl" />
     <Midl Include="ColorScheme.idl" />
     <Midl Include="Command.idl" />
+    <Midl Include="EnvironmentVariableMap.idl">
+      <SubType>Designer</SubType>
+    </Midl>
     <Midl Include="GlobalAppSettings.idl" />
     <Midl Include="IconPathConverter.idl" />
     <Midl Include="KeyMapping.idl" />
@@ -190,7 +200,6 @@
   </ItemDefinitionGroup>
   <!-- ========================= Globals ======================== -->
   <Import Project="$(OpenConsoleDir)src\cppwinrt.build.post.props" />
-
   <Import Project="..\..\..\packages\Microsoft.UI.Xaml.2.5.0-prerelease.201202003\build\native\Microsoft.UI.Xaml.targets" Condition="Exists('..\..\..\packages\Microsoft.UI.Xaml.2.5.0-prerelease.201202003\build\native\Microsoft.UI.Xaml.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
@@ -212,6 +221,5 @@
   <Target Name="_TerminalAppGenerateUserSettingsH" Inputs="userDefaults.json" Outputs="Generated Files\userDefaults.h" BeforeTargets="BeforeClCompile">
     <Exec Command="powershell.exe -noprofile –ExecutionPolicy Unrestricted $(OpenConsoleDir)\tools\GenerateHeaderForJson.ps1 -JsonFile userDefaults.json -OutPath '&quot;Generated Files\userDefaults.h&quot;' -VariableName UserSettingsJson" />
   </Target>
-
   <Import Project="$(SolutionDir)build\rules\CollectWildcardResources.targets" />
 </Project>

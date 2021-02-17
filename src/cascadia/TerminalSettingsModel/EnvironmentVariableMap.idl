@@ -1,0 +1,20 @@
+// Copyright (c) Microsoft Corporation.
+// Licensed under the MIT license.
+
+namespace Microsoft.Terminal.Settings.Model
+{
+    [default_interface]
+    runtimeclass EnvironmentVariableMap 
+    {
+        EnvironmentVariableMap();
+
+        // winrt::com_arrays prevent data binding.
+        // Instead of representing Table as a property,
+        // we expose the getter as a function.
+        String[] Keys();
+        String[] RawValues();
+        String[] ResolvedValues();
+        void SetValue(String key, String value);
+    }
+}
+
