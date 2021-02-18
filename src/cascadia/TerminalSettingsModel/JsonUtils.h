@@ -412,6 +412,30 @@ namespace Microsoft::Terminal::Settings::Model::JsonUtils
         }
     };
 
+    template<>
+    struct ConversionTrait<Json::Value>
+    {
+        Json::Value FromJson(const Json::Value& json)
+        {
+            return json;
+        }
+
+        bool CanConvert(const Json::Value&)
+        {
+            return true;
+        }
+
+        Json::Value ToJson(const Json::Value& val)
+        {
+            return val;
+        }
+
+        std::string TypeDescription() const
+        {
+            return "Json::Value";
+        }
+    };
+
 #ifdef WINRT_Windows_UI_H
     template<>
     struct ConversionTrait<winrt::Windows::UI::Color>

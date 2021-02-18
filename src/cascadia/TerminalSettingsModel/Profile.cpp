@@ -418,7 +418,8 @@ void Profile::LayerJson(const Json::Value& json)
         {
             EnvironmentVariables({});
         }
-        _EnvironmentVariables->LayerJson(environmentNode);
+        auto environmentVariableMap = winrt::get_self<EnvironmentVariableMap>(*_EnvironmentVariables);
+        environmentVariableMap->LayerJson(environmentNode);
 
         /*
         auto view = rawEnvMap.GetView();
@@ -623,6 +624,12 @@ Json::Value Profile::ToJson() const
     JsonUtils::SetValueForKey(json, TabColorKey, _TabColor);
     JsonUtils::SetValueForKey(json, BellStyleKey, _BellStyle);
     JsonUtils::SetValueForKey(json, PixelShaderPathKey, _PixelShaderPath);
+
+    if (HasEnvironmentVariables())
+    {
+        auto environmentVariableMap = winrt::get_self<EnvironmentVariableMap>(*_EnvironmentVariables);
+        JsonUtils::SetValueForKey(json, EnvironmentKey, environmentVariableMap->ToJson());
+    }
 
     return json;
 }
