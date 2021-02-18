@@ -2,6 +2,9 @@
 
 #include "EnvironmentVariableMap.g.h"
 #include "../inc/cppwinrt_utils.h"
+#include <winrt/impl/Windows.Foundation.Collections.2.h>
+
+using namespace winrt::Windows::Foundation::Collections;
 
 namespace winrt::Microsoft::Terminal::Settings::Model::implementation
 {
@@ -17,8 +20,10 @@ namespace winrt::Microsoft::Terminal::Settings::Model::implementation
         com_array<winrt::hstring> RawValues() const noexcept;
         com_array<winrt::hstring> ResolvedValues() const noexcept;
         void SetValue(winrt::hstring key, winrt::hstring value) noexcept;
+        StringMap GetResolvedEnvironmentVariables();
     private:
-        void ResolveEnvironmentVariables() noexcept;
+        void ResolveEnvironmentVariables();
+        std::wstring ResolveEnvironmentVariableValue(const std::wstring& key, std::list<std::wstring> seenKeys);
 
         class VariablePair
         {

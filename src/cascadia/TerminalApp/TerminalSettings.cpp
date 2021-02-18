@@ -194,10 +194,10 @@ namespace winrt::TerminalApp::implementation
             _TabColor = static_cast<uint32_t>(colorRef);
         }
 
-        //if (profile.HasEnvironmentVariables())
-        //{
-        //    _EnvironmentVariables = profile.EnvironmentVariables();
-        //}
+        if (profile.HasEnvironmentVariables())
+        {
+            _EnvironmentVariables = profile.EnvironmentVariables().GetResolvedEnvironmentVariables();
+        }
     }
 
     // Method Description:

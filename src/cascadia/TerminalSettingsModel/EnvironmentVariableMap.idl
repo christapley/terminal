@@ -15,6 +15,7 @@ namespace Microsoft.Terminal.Settings.Model
         String[] RawValues();
         String[] ResolvedValues();
         void SetValue(String key, String value);
+        Windows.Foundation.Collections.StringMap GetResolvedEnvironmentVariables();
     }
 }
 
